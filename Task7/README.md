@@ -144,7 +144,7 @@ Nice we got the admin's uid! (`15861`). Now we need to get the client secret. Th
 So lets run the [script](./genTargetToken.py) I made to automate this process
 
 ```
-$ $ python genTargetToken.py
+$ python genTargetToken.py
 (..snipped..)
 
 [!] Retrieved client secret:    6E4NYzI4gkMlEcYSZv5z1qaNKCoW2F2P
