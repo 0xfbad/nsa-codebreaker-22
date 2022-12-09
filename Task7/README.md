@@ -23,7 +23,7 @@
 ## Files
 * [provided/](provided/)
 	- (empty)
-* [genAdminToken.py](genAdminToken.py) - Generates a new admin token.
+* [genTargetToken.py](genTargetToken.py) - Generates a token given a username
 
 <!-- BREAKDOWN & SOLUTION -->
 ## Breakdown & Solution
