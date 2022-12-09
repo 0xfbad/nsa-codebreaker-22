@@ -1,0 +1,65 @@
+{% extends 'base.html' %}
+
+
+
+{% block content %}
+<!DOCKTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Ransomwareforhire.net</title>
+	<style>
+  	  .column{
+ 	   float: left;
+	   width: 50%;
+	}
+
+	  .row:after{
+	    content: "";
+	    display: table;
+	    clear: both;
+	}
+
+	  .box{
+	    border: 5px solid red;
+	    padding: 30 px;
+	    margin: 15px;
+	}
+	h3 {text-align: center;}
+	p {text-align: center;}
+	</style>
+</head>
+<body>
+	<h1> User Info ({{ userName }}) </h1>
+	<div class="row">
+	  <div class="column">
+	    <div class="box">
+	      <h3> Date Joined: </h3>
+	        <p>{{ memberSince }}</p>
+	    </div>
+	  </div>
+	  <div class="column">
+	    <div class="box">
+	      <h3> Jobs Completed: </h3>
+	      <p>{{ clientsHelped }}</p>
+	    </div>
+	  </div>
+	  <div class="column">
+	    <div class="box">
+	      <h3> Users Helped: </h3>
+	      <p>{{ hackersHelped }}</p>
+	    </div>
+	  </div>
+	  <div class="column">
+	    <div class="box">
+	      <h3> Programs Contributed: </h3>
+	      <p>{{ contributed }}</p>
+	    </div>
+	  </div>
+	</div> 
+</body>
+</html>
+
+
+{% endblock %}
+

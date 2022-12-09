@@ -1,0 +1,85 @@
+
+
+
+{% extends 'base.html' %}
+
+{% block content %}
+
+<!DOCKTYPE html>
+<html>
+<style>
+  .column {
+    float: left;
+    width: 50%;
+  }
+
+  .row:after {
+
+    content: "";
+    display: table;
+    clear:both;
+  }
+
+  .box {
+    border: 5px solid gray;
+    padding: 30 px;
+    margin: 15px;
+
+  }
+
+</style>
+<body>
+<h1> Admin Tools </h1>
+
+
+  <div class= "row">
+
+ 
+   <div class="column">
+    <div class="box">
+    <h3 style="text-align: center;"> Create User </h3>
+    <form>
+	<label for="uname"> Username: </label> <br>
+	<input type="text" id="uname" name="uname">
+	<button type="button" onclick="alert('User creation through the web interface is currently disabled.  Please manually edit the database.')"> Submit </button>
+
+   </div>
+   </div>
+
+  <div class= "column">
+   <div class= "box">
+    <h3 style="text-align:center;"> Delete User </h3>
+    <form> 
+      <label for="uname"> Username: </label> <br>
+      <input type="text" id="uname" name="uname">
+      <button type="button" onclick="alert('User deletion through the web interface is currently disabled.  Please manually edit the database.')"> Submit </button>
+    </form>
+  </div>
+ </div>
+
+ <div class= "column">
+  <div class= "box">
+   <h3 style="text-align:center;"> Add credit for a user </h3>
+   <form action="credit" method="post"> 
+     <p><label for="hackername"> Username: </label><input type="text" id="hackername" name="hackername"></p>
+     <p><label for="credits"> Credits: </label><input type="text" id="credits" name="credits"></p>
+     <p><label for="receipt"> Receipt: </label><input type="text" id="receipt" name="receipt"></p>
+     <input type="submit">
+   </form>
+ </div>
+</div>
+
+  <div class="column">
+    <div class="box">
+ 	<h3 style="text-align:center;">Key Generation Log </h3>
+        <p> Access the key generation log, for troubleshooting purposes. </p>
+	<button type="button" onclick="window.location.href = 'fetchlog?log=keygeneration.log'"> Retrieve List </button>
+  </div>
+  </div>
+
+ </div>
+
+  </div>
+
+</html>
+{% endblock %}

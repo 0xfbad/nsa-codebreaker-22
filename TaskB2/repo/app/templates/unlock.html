@@ -1,0 +1,58 @@
+
+{% extends 'base.html' %}
+
+{% block head_js %}
+
+var getJSON = function(url, callback) {
+	var xhr = new XMLHttpRequest();
+	xhr.open('GET', url, true);
+	xhr.responseType = 'json';
+	xhr.onload = function() {
+		var status = xhr.status;
+		if (status === 200) {
+			callback(null, xhr.response);
+		} else {
+			callback(status, xhr.response);
+		}
+	};
+	xhr.send()
+};
+
+var send_request = function() {	
+	receipt = encodeURIComponent(document.getElementById("receipt").value)
+	getJSON(`unlock?receipt=${receipt}`, function(err, data) {
+		if (err != null) {
+			console.log(err);
+		} else {
+			if ('key' in data) {
+				document.getElementById("results").innerHTML = `Key: <em>${data.key}</em>`;
+			} else {
+				document.getElementById("results").innerHTML = `Error: <em>${data.error}</em>`;
+			}
+		}
+	});
+};
+
+{% endblock %}
+
+{%block content %}
+
+<h3 style="text-align:center"> Unlock Request </h3>
+
+
+<div style="text-align:center">
+	<p>Use this form to unlock the encryption key for a customer.</p>
+	<p>Note that our secure storage system will only provide the key if a proper receipt token is provided. </p>
+</div>
+
+<div style="text-align: center">
+	<form>
+		<label for="receipt">Receipt:&nbsp;&nbsp;</label><input type="text" id="receipt" name="receipt">
+		<button type="button" id="submit" onclick="send_request()">Submit request...</button>
+	</form>
+</div>
+
+<div style="text-align: center" id="results">
+</div>
+
+{% endblock %}

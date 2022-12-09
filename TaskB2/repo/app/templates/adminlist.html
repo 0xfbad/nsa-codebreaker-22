@@ -1,0 +1,47 @@
+
+{% extends "base.html" %}
+
+{%block content %}
+<!DOCKTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Ransomwareforhire.net</title>
+</head>
+<body>
+	<h1>Currently Online Admins </h1>
+	<div style="background-color: #DDDDB7;">
+	  <ul style="margin-left: 0; padding-left: 0;">
+	  {% for item in adminlist %}
+	    <li> {{item}} </li>
+	  </ul>
+	  {% endfor %}
+	</div>	
+
+
+	<h1> Former Admins </h1>
+	  <div style="background-color: #DDDDB7;">
+	    <ul style="margin-left: 0; padding-left: 0;">
+	      <li> evil dinosaur </li>
+		<ul>
+		  <li> Reason for Leaving: meteor </li>
+		  <li> Time left: 50000 B.C. </li>
+		</ul>
+	      <li> evil tree </li>
+		<ul>
+		  <li> Reason for Leaving: winter </li>
+		  <li> Date left: 4th May 2012 </li>
+		</ul>
+	      <li> evil rock </li>
+		<ul>
+		  <li> Reason for Leaving: erosion </li>
+		  <li> Date Left: 4 </li>
+		</ul>
+	  </ul>
+	</div>
+</body>
+</html>
+
+
+
+{% endblock %}
