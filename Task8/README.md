@@ -153,7 +153,7 @@ $ file keyMaster
 keyMaster: ELF 64-bit LSB executable, x86-64, version 1 (SYSV), dynamically linked, interpreter /lib64/ld-linux-x86-64.so.2, for GNU/Linux 3.2.0, Go BuildID=FeeM7E1BxG8P8Nja2FeT/6JtOtF_3gBRqjJolw_C5/9-c3gRqihLNGfuGBnA4q/VjnaYGjdxFpj1FM_kEnN, BuildID[sha1]=64c92e0c1609beaae73cb04c698f3ecbf5b1b35b, stripped
 ```
 
-Lets run the binary in a sandbox with the known arguments for our victim:
+Lets run the binary in a sandbox with some random parameters:
 
 ```
 $ ./keyMaster lock 1 1 0xfbad

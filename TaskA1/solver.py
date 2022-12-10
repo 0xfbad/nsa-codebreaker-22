@@ -23,24 +23,22 @@ with open("./provided/vpn.log", "r") as log:
 
 # Find if any user has multiple sessions at the same time
 def scan():
-	for user in logons:
-		if len(logons[user]) > 1: # no need to check users with only one session
-			for session in logons[user]:
-				startTime = session["timeBegan"]
-				endTime = startTime + session["duration"]
+	for user, sessions in logons.items():
+		for i, session in enumerate(sessions):
+			start_time = session["timeBegan"]
+			end_time = start_time + session["duration"]
 
-				# Check if next session is within the same time period
-				for nextSession in logons[user]:
-					nextStartTime = nextSession["timeBegan"]
-					nextEndTime = nextStartTime + nextSession["duration"]
+			for next_session in sessions[i + 1:]:
+				next_start_time = next_session["timeBegan"]
+				next_end_time = next_start_time + next_session["duration"]
 
-					if startTime != nextStartTime: # Make sure not comparing the same session
-						if nextStartTime <= endTime and nextEndTime >= startTime: # Check if next session is within the same time period
-							print(f'[!] Found multiple concurrent sessions for {user}')
-							print(f'[*] Session 1: {datetime.datetime.fromtimestamp(startTime)} EDT - {datetime.datetime.fromtimestamp(endTime)} EDT, duration of {format(session["duration"]/3600, ".2f")} hours')
-							print(f'[*] Session 2: {datetime.datetime.fromtimestamp(nextStartTime)} EDT - {datetime.datetime.fromtimestamp(nextEndTime)} EDT, duration of {format(nextSession["duration"]/3600, ".2f")} hours')
-							print(f'[?] IPs: {session["ip"]} and {nextSession["ip"]}')
-							return
+				if start_time != next_start_time: # Make sure not comparing the same session
+					if next_start_time <= end_time and next_end_time >= start_time: # Check if next session is within the same time period
+						print(f'[!] Found multiple concurrent sessions for {user}')
+						print(f'[*] Session 1: {datetime.datetime.fromtimestamp(start_time)} EDT - {datetime.datetime.fromtimestamp(end_time)} EDT, duration of {format(session["duration"]/3600, ".2f")} hours')
+						print(f'[*] Session 2: {datetime.datetime.fromtimestamp(next_start_time)} EDT - {datetime.datetime.fromtimestamp(next_end_time)} EDT, duration of {format(next_session["duration"]/3600, ".2f")} hours')
+						print(f'[?] IPs: {session["ip"]} and {next_session["ip"]}')
+						return
 
 if __name__ == "__main__":
 	scan()

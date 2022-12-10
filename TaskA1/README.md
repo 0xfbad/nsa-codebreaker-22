@@ -34,19 +34,18 @@ So lets make a small python script that looks for multiple concurrent sessions. 
 Dissecting the [script](solver.py), here is the most important part:
 ```py
 for user in logons:
-	if len(logons[user]) > 1: # no need to check users with only one session
-		for session in logons[user]:
-			startTime = session["timeBegan"]
-			endTime = startTime + session["duration"]
+	for user, sessions in logons.items():
+		for i, session in enumerate(sessions):
+			start_time = session["timeBegan"]
+			end_time = start_time + session["duration"]
 
-			# Check if next session is within the same time period
-			for nextSession in logons[user]:
-				nextStartTime = nextSession["timeBegan"]
-				nextEndTime = nextStartTime + nextSession["duration"]
+			for next_session in sessions[i + 1:]:
+				next_start_time = next_session["timeBegan"]
+				next_end_time = next_start_time + next_session["duration"]
 
-				if startTime != nextStartTime: # Make sure not comparing the same session
-					if nextStartTime <= endTime and nextEndTime >= startTime: # Check if next session is within the same time period
-						# Found a concurrent session
+				if start_time != next_start_time: # Make sure not comparing the same session
+					if next_start_time <= end_time and next_end_time >= start_time: # Check if next session is within the same time period
+						# Found a concurrent session!!
 ```
 
 See, we're not given an end time, but we are given a duration and a start time. Which means we can get `endTime` by adding the duration to the start time *(small note, I did convert the times from the log to unix time, so the times are all in seconds)*.
